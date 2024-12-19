@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konversi Mata Uang ke Rupiah</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Konversi Mata Uang ke Rupiah</h1>
+
+        <label for="nilaiValas">Masukkan Nilai Mata Uang Asing:</label>
+        <input type="number" id="nilaiValas" placeholder="Masukkan nilai mata uang asing" />
+
+        <label for="valas">Pilih Mata Uang Asing:</label>
+        <select id="valas">
+            <option value="USD">Dollar US</option>
+            <option value="SGD">Dollar Singapore</option>
+            <option value="MYR">Ringgit Malaysia</option>
+            <option value="JPY">Yen Jepang</option>
+            <option value="EUR">Euro</option>
+            <option value="SAR">Riyal Arab Saudi</option>
+        </select>
+
+        <label for="nilaiRupiah">Nilai Rupiah:</label>
+        <input type="text" id="nilaiRupiah" readonly />
+
+        <button onclick="konversi()">Konversi</button>
+    </div>
+
+    <script>
+        function konversi() {
+            const nilaiValas = parseFloat(document.getElementById("nilaiValas").value);
+            const valas = document.getElementById("valas").value;
+            let nilaiRupiah;
+
+            if (isNaN(nilaiValas) || nilaiValas <= 0) {
+                alert("Mohon masukkan nilai mata uang asing yang valid.");
+            return;
+            }
+
+            switch (valas) {
+                case "USD":
+                    nilaiRupiah = nilaiValas * 9915;
+                    break;
+                case "SGD":
+                    nilaiRupiah = nilaiValas * 13472;
+                    break;
+                case "MYR":
+                    nilaiRupiah = nilaiValas * 874;
+                    break;
+                case "JPY":
+                    nilaiRupiah = nilaiValas * 120;
+                    break;
+                case "EUR":
+                    nilaiRupiah = nilaiValas * 15888;
+                    break;
+                case "SAR":
+                    nilaiRupiah = nilaiValas * 3592;
+                    break;
+                default:
+                    alert("Pilih mata uang asing yang valid.");
+                    return;
+            }
+
+            document.getElementById("nilaiRupiah").value = nilaiRupiah.toFixed(2);
+        }
+
+    </script>
+</body>
+</html>

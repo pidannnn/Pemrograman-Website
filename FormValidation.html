@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        h1{
+            text-align: center;
+            padding-bottom: 3rem;
+        }
+        form{
+            border: 1px solid black;
+        }
+        .form{
+            display: flex;
+            padding: 1rem;
+            gap: 2rem;
+        }
+        .label{
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+        }
+        .kotaknya{
+            display: flex;
+            flex-flow: column;
+            gap: 1rem;
+        }
+        .pengisian{
+            display: flex;
+            gap: 1rem;
+        }
+        span{
+            color: red;
+            display: none;
+        }
+        .btn{
+            padding-left: 1rem;
+            padding-bottom: 1rem;
+            padding-top: 1rem;
+        }
+        button:hover{
+            cursor: pointer;
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form 
+        <br>Validation</h1>
+    <form action="#" method="get" onsubmit="return submitForm()">
+        <div class="form">
+            <div class="label">
+                <label for="nama">Nama</label>
+                <label for="email">Email</label>
+                <label for="jam">Jam Keberangkatan</label>
+                <label for="tujuan">Tujuan Keberangkatan</label>
+                <label for="tiket">Jumlah Tiket</label>
+            </div>
+            <div class="kotaknya">
+                <div class="pengisian">
+                    <input type="text" id="nama" placeholder="Mr.Xx" maxlength="30">
+                    <span id="nama_error">Input Tidak Valid</span>
+                </div>
+                <div class="pengisian">
+                    <input type="text" id="email" placeholder="xxxx@xxx.xx">
+                    <span id="email_error">Input Tidak Valid</span>
+                </div>
+                <div class="pengisian">
+                    <input type="text" id="jam" placeholder="00.00">
+                    <span id="jam_error">Input Tidak Valid</span>
+                </div>
+                <div class="pengisian">
+                    <input type="text" id="tujuan" placeholder="Puncak">
+                    <span id="tujuan_error">Input Tidak Valid</span>
+                </div>
+                <div class="pengisian">
+                    <input type="text" id="tiket" placeholder="1-10" min="1">
+                    <span id="tiket_error">Input Tidak Valid</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <script>
+        // Pengambilan Element
+        let nama = document.getElementById("nama");
+        let email = document.getElementById("email");
+        let jam = document.getElementById("jam");
+        let tujuan = document.getElementById("tujuan");
+        let tiket = document.getElementById("tiket");
+
+        let nama_error = document.getElementById("nama_error");
+        let email_error = document.getElementById("email_error");
+        let jam_error = document.getElementById("jam_error");
+        let tujuan_error = document.getElementById("tujuan_error");
+        let tiket_error = document.getElementById("tiket_error");
+
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        let jamPattern = /^[0-9]{2}.[0-9]{2}$/;
+
+        // Logic
+        function submitForm() {
+            let cekValid = true;
+
+            if(nama.value == '') {
+                nama_error.style.display = "block";
+                cekValid = false;
+            }else if(nama.value.length > 30) {
+                nama_error.style.display = "block";
+                cekValid = false;
+            }else {
+                nama_error.style.display = "none";
+            }
+
+            if(email.value == '') {
+                email_error.style.display = "block";
+                cekValid = false;
+            }else if(!emailPattern.test(email.value)) {
+                email_error.style.display = "block";
+                cekValid = false;
+            }else {
+                email_error.style.display = "none";
+            }
+
+            if(jam.value == '') {
+                jam_error.style.display = "block";
+                cekValid = false;
+            }else if(!jamPattern.test(jam.value)) {
+                jam_error.style.display = "block";
+                cekValid = false;
+            }else {
+                jam_error.style.display = "none";
+            }
+
+            if(tujuan.value == '') {
+                tujuan_error.style.display = "block";
+                cekValid = false;
+            }else {
+                tujuan_error.style.display = "none";
+            }
+
+            if(tiket.value == '') {
+                tiket_error.style.display = "block";
+                cekValid = false;
+            }else if(isNaN(tiket.value)) {
+                tiket_error.style.display = "block";
+                cekValid = false;
+            }else if(tiket.value < 1 || tiket.value > 10) {
+                tiket_error.style.display = "block";
+                cekValid = false;
+            }else {
+                tiket_error.style.display = "none";
+            }
+
+            return cekValid;
+        }
+    </script>
+</body>
+</html>
